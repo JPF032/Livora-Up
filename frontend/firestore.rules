@@ -1,0 +1,43 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Protection des données utilisateur
+    match /users/{userId} {
+      // Un utilisateur ne peut accéder qu'à ses propres données
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Permettre aux administrateurs d'accéder aux données utilisateur (facultatif)
+      // allow read: if request.auth != null && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    
+    // Règles pour les plans nutritionnels
+    match /nutritionPlans/{planId} {
+      // Lecture pour l'utilisateur propriétaire ou plans publics
+      allow read: if request.auth != null && (
+        resource.data.userId == request.auth.uid || 
+        resource.data.isPublic == true
+      );
+      
+      // Écriture uniquement pour l'utilisateur propriétaire
+      allow write: if request.auth != null && 
+        request.resource.data.userId == request.auth.uid;
+    }
+    
+    // Règles pour les entrées d'activité
+    match /activities/{activityId} {
+      allow read, write: if request.auth != null && 
+        request.resource.data.userId == request.auth.uid;
+    }
+    
+    // Règles pour les données nutritionnelles (publiques)
+    match /nutrition/{itemId} {
+      allow read: if request.auth != null;  // Accessible en lecture pour tous les utilisateurs authentifiés
+      allow write: if false;  // Pas d'écriture directe par les utilisateurs
+    }
+    
+    // Règles par défaut - refuser l'accès sauf si une règle spécifique l'autorise
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

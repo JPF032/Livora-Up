@@ -1,0 +1,61 @@
+// Schéma Prisma pour Livora UP
+// Ce fichier définit le modèle de données pour l'application
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Utilisateur
+model User {
+  id             String         @id @default(uuid())
+  email          String         @unique
+  firebaseUid    String?        @unique // Pour lier à l'authentification Firebase
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  profile        UserProfile?
+  sportPrograms  SportProgram[]
+
+  @@index([firebaseUid])
+}
+
+// Profil utilisateur contenant les informations personnelles
+model UserProfile {
+  id                      String    @id @default(uuid())
+  user                    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId                  String    @unique
+  age                     Int?
+  sex                     String?   // "Homme", "Femme", "Autre"
+  weight                  Float?    // Poids en kg
+  height                  Float?    // Taille en cm
+  currentActivityLevel    String?
+  sportObjective          String?
+  sportConstraints        String[]  // Array de contraintes
+  availableEquipment      String[]  // Équipement disponible
+  availabilityDescription String?   // Description de disponibilité
+  updatedAt               DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+// Programme sportif généré par l'IA
+model SportProgram {
+  id                    String   @id @default(uuid())
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId                String
+  name                  String
+  introduction          String?  @db.Text
+  // Structure JSON complète du programme généré par l'IA
+  aiGeneratedProgramJson Json
+  isActive              Boolean  @default(true)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  version               Int      @default(1)
+
+  @@index([userId, isActive])
+  @@index([userId, createdAt(sort: Desc)])
+}
