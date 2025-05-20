@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { COLORS, SIZES, FONTS, SHARED_STYLES } from '../../src/config/theme';
-import { generateAISportProgram, getCurrentSportProgram, validateSportProgram } from '../../src/services/sportProgramService';
+import { generateAISportProgram, getCurrentSportProgram, validateSportProgram, fetchSportProgram } from '../../src/services/sportProgramService';
 
 // Fonction pour récupérer l'ID utilisateur temporaire 
 // Dans une vraie application, cela viendrait du système d'authentification
@@ -356,3 +356,5 @@ const styles = StyleSheet.create({
     marginTop: SIZES.base,
   },
 });
+
+// Pas d'export supplémentaire nécessaire car il y a déjà un export par défaut à la ligne 24

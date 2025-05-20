@@ -8,6 +8,8 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const path = require('path');
 const apiRoutes = require('./routes/api');
+const nutritionProgramRoutes = require('./routes/nutritionProgramRoutes');
+const nutritionAnalysisRoutes = require('./routes/nutritionAnalysisRoutes');
 const { initializeFirebaseAdmin } = require('./config/firebase');
 const { apiLimiter } = require('./middlewares/rateLimitMiddleware');
 const { logger, logHttpRequest, logError } = require('./utils/logger');
@@ -79,8 +81,10 @@ if (initializeFirebaseAdmin()) {
 // Cela aide à prévenir les attaques par déni de service (DoS)
 app.use('/api/v1', apiLimiter);
 
-// Route API
+// Routes API
 app.use('/api/v1', apiRoutes);
+app.use('/api/v1/nutrition-programs', nutritionProgramRoutes);
+app.use('/api/v1/nutrition-analysis', nutritionAnalysisRoutes);
 
 // Route racine
 app.get('/', (req, res) => {

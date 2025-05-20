@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
-import { Audio } from 'expo-audio';
+import * as Audio from 'expo-audio';
 import { useNavigation } from '@react-navigation/native';
 import { voiceRecognitionService } from '../services/voiceRecognitionService';
 import { parseVoiceCommand } from '../utils/voiceCommandParser';

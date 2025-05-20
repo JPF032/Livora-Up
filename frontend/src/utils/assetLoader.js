@@ -3,7 +3,7 @@
  */
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
-import { Audio } from 'expo-audio';
+import * as Audio from 'expo-audio';
 import { handleError, ErrorTypes } from './errorHandler';
 
 /**

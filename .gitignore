@@ -3,6 +3,110 @@ node_modules/
 .pnp
 .pnp.js
 
+# Environment variables
+.env
+.env.*
+!.env.example
+!.env.development.example
+!.env.production.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Firebase
+*-credentials.json
+firebase-debug.log
+firebase-debug.*.log
+
+# Prisma
+prisma/migrations/
+!prisma/migrations/.gitkeep
+prisma/dev.db
+prisma/*.db
+prisma/*.db-journal
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Testing
+coverage/
+
+# Production
+build/
+dist/
+.next/
+out/
+web-build/
+
+# Expo specific
+.expo/
+.expo-shared/
+web-build/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+
+# Android/IntelliJ
+build/
+.idea/
+
+# Local development
+*.local
+
+# Misc
+*.log
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.cer
+*.der
+*.pfx
+*.p7b
+*.p7c
+*.p7s
+*.p7m
+*.p7r
+*.p7s
+*.spc
+*.sst
+*.stl
+*.stl.*
+*.p7s.*
+*.p7c.*
+*.p7m.*
+*.p7r.*
+*.p7s.*
+*.spc.*
+*.sst.*
+*.stl.*
+*.p7s.*.p7m
+*.p7s.*.p7r
+*.p7s.*.p7s
+*.p7s.*.spc
+*.p7s.*.sst
+*.p7s.*.stl
+
 # Testing
 coverage/
 

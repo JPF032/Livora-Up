@@ -1,0 +1,81 @@
+2025-05-14 16:08:02 [HTTP]: GET /api/programs/sport
+Metadata: {
+  "method": "GET",
+  "url": "/api/programs/sport",
+  "query": {},
+  "userAgent": "okhttp/4.12.0",
+  "ip": "::ffff:192.168.7.152",
+  "userId": "anonymous"
+}
+2025-05-14 16:26:43 [HTTP]: GET /api/programme/nutrition
+Metadata: {
+  "method": "GET",
+  "url": "/api/programme/nutrition",
+  "query": {},
+  "userAgent": "okhttp/4.12.0",
+  "ip": "::ffff:192.168.7.152",
+  "userId": "anonymous"
+}
+2025-05-14 16:26:51 [HTTP]: GET /api/programs/sport
+Metadata: {
+  "method": "GET",
+  "url": "/api/programs/sport",
+  "query": {},
+  "userAgent": "okhttp/4.12.0",
+  "ip": "::ffff:192.168.7.152",
+  "userId": "anonymous"
+}
+2025-05-14 16:33:10 [HTTP]: GET /api/programme/nutrition
+Metadata: {
+  "method": "GET",
+  "url": "/api/programme/nutrition",
+  "query": {},
+  "userAgent": "okhttp/4.12.0",
+  "ip": "::ffff:192.168.7.152",
+  "userId": "anonymous"
+}
+2025-05-14 16:33:15 [HTTP]: GET /api/programs/sport
+Metadata: {
+  "method": "GET",
+  "url": "/api/programs/sport",
+  "query": {},
+  "userAgent": "okhttp/4.12.0",
+  "ip": "::ffff:192.168.7.152",
+  "userId": "anonymous"
+}
+2025-05-14 17:18:42 [HTTP]: GET /api/programs/sport
+Metadata: {
+  "method": "GET",
+  "url": "/api/programs/sport",
+  "query": {},
+  "userAgent": "okhttp/4.12.0",
+  "ip": "::ffff:192.168.7.152",
+  "userId": "anonymous"
+}
+2025-05-14 17:40:40 [HTTP]: GET /api/programs/sport
+Metadata: {
+  "method": "GET",
+  "url": "/api/programs/sport",
+  "query": {},
+  "userAgent": "okhttp/4.12.0",
+  "ip": "::ffff:192.168.7.152",
+  "userId": "anonymous"
+}
+2025-05-14 17:42:40 [HTTP]: GET /api/programs/nutrition/simple
+Metadata: {
+  "method": "GET",
+  "url": "/api/programs/nutrition/simple",
+  "query": {},
+  "userAgent": "okhttp/4.12.0",
+  "ip": "::ffff:192.168.7.152",
+  "userId": "anonymous"
+}
+2025-05-14 17:44:00 [HTTP]: GET /api/nutrition-programs/simple
+Metadata: {
+  "method": "GET",
+  "url": "/api/nutrition-programs/simple",
+  "query": {},
+  "userAgent": "okhttp/4.12.0",
+  "ip": "::ffff:192.168.7.152",
+  "userId": "anonymous"
+}

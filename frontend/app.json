@@ -8,7 +8,7 @@
     "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/livora/logo.svg",
+      "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#FFFFFF"
     },
@@ -43,7 +43,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/livora/logo.svg",
+          "image": "./assets/images/splash-icon.png",
           "imageWidth": 250,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"

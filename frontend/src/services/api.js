@@ -290,25 +290,25 @@ export const api = {
   
   // Services liés au programme nutritionnel
   nutrition: {
-    getProgram: (token = null) => fetchApi('programs/nutrition', 'GET', null, token),
-    trackMeal: (data, token = null) => fetchApi('programs/nutrition/track', 'POST', data, token),
+    getProgram: (token = null) => fetchApi('nutrition-programs', 'GET', null, token),
+    trackMeal: (data, token = null) => fetchApi('nutrition-programs/track', 'POST', data, token),
     
     // Nouvelles fonctionnalités d'analyse alimentaire et gestion des repas
-    getSimplePlan: (token = null) => fetchApi('programme/nutrition', 'GET', null, token),
-    upsertSimplePlan: (data, token = null) => fetchApi('programme/nutrition', 'POST', data, token),
+    getSimplePlan: (token = null) => fetchApi('nutrition-programs/simple', 'GET', null, token),
+    upsertSimplePlan: (data, token = null) => fetchApi('nutrition-programs/simple', 'POST', data, token),
     
     // Service d'analyse d'image pour estimation calorique
     analyzeImage: (base64Image, token = null) => 
-      fetchApi('programs/nutrition/analyze', 'POST', { image: base64Image }, token),
+      fetchApi('nutrition-programs/analyze', 'POST', { image: base64Image }, token),
     
     // Ajouter une entrée de repas après analyse
     addMealEntry: (data, token = null) => 
-      fetchApi('programs/nutrition/entries', 'POST', data, token),
+      fetchApi('nutrition-programs/entries', 'POST', data, token),
     
     // Récupérer les entrées de repas
     getMealEntries: (date = null, token = null) => {
       const query = date ? `?date=${date}` : '';
-      return fetchApi(`programs/nutrition/entries${query}`, 'GET', null, token);
+      return fetchApi(`nutrition-programs/entries${query}`, 'GET', null, token);
     },
   },
 };

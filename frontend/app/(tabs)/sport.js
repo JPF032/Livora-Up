@@ -15,6 +15,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { api } from '../../src/services/api';
 import { useRouter } from 'expo-router';
 import { useAISportProgram } from '../../src/hooks/useAISportProgram';
+import GenerateNutritionPlanButton from '../../src/components/GenerateNutritionPlanButton';
 
 export default function SportProgramScreen() {
   const router = useRouter();
@@ -73,12 +74,19 @@ export default function SportProgramScreen() {
         ) : error ? (
           <View style={styles.errorContainer}>
             <Text style={styles.errorText}>{error}</Text>
-            <TouchableOpacity style={styles.retryButton} onPress={fetchSportProgram}>
+            <TouchableOpacity style={styles.retryButton} onPress={fetchProgram}>
               <Text style={styles.retryButtonText}>Réessayer</Text>
             </TouchableOpacity>
           </View>
         ) : program ? (
           <View>
+            <View style={styles.actionButtons}>
+              <GenerateNutritionPlanButton 
+                onSuccess={() => router.push('/nutrition')} 
+                style={styles.nutritionPlanButton}
+              />
+            </View>
+            
             {program.days.map((day, index) => (
               <View key={day._id || index} style={styles.dayCard}>
                 <Text style={styles.dayTitle}>{day.name}</Text>

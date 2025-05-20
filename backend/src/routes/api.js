@@ -10,6 +10,14 @@ const {
   listUserPrograms 
 } = require('../controllers/sportProgramController');
 
+// Import du contrôleur de programmes nutritionnels
+const {
+  generateNutritionPlanFromSportProgram,
+  getCurrentNutritionProgram,
+  getUserSimplePlan,
+  upsertSimplePlan
+} = require('../controllers/nutritionProgramController');
+
 // Import du contrôleur d'authentification
 const {
   authenticateUser,
@@ -93,6 +101,35 @@ router.get('/sport-programs/list',
   requireAuth, 
   validateRequest(schemas.listProgramsQuery, 'query'),  // Validation des paramètres de requête
   listUserPrograms
+);
+
+// Routes pour les programmes nutritionnels
+router.post('/nutrition-programs/generate-from-sport', 
+  verifyFirebaseToken, 
+  requireAuth, 
+  verifyCsrfToken,
+  sportProgramLimiter,  // Réutilisation du limiteur sportif
+  generateNutritionPlanFromSportProgram
+);
+
+router.get('/nutrition-programs/current', 
+  verifyFirebaseToken, 
+  requireAuth, 
+  getCurrentNutritionProgram
+);
+
+// Routes pour le plan nutritionnel simple
+router.get('/nutrition-programs/simple', 
+  verifyFirebaseToken, 
+  requireAuth, 
+  getUserSimplePlan
+);
+
+router.post('/nutrition-programs/simple', 
+  verifyFirebaseToken, 
+  requireAuth, 
+  verifyCsrfToken,
+  upsertSimplePlan
 );
 
 // Routes pour le profil utilisateur

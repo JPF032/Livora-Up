@@ -2,10 +2,9 @@
  * Service de gestion des programmes sportifs pour Livora UP
  * Contient les fonctions pour générer et récupérer des programmes sportifs via l'API
  */
-import apiClient from './apiClient';
+import { apiClient } from './apiClient';
 
-// Instance du client API
-const api = new apiClient();
+// Utilisation directe de l'instance apiClient pré-initialisée
 
 /**
  * Demande la génération d'un nouveau programme sportif au backend.
@@ -14,7 +13,8 @@ const api = new apiClient();
  */
 export const generateAISportProgram = async (userProfile) => {
   try {
-    const response = await api.post('sport-programs/generate-ai', { userProfile });
+    // Mise à jour du chemin pour correspondre à l'API actuelle
+    const response = await apiClient.post('sport-programs/generate', { userProfile });
     return response;
   } catch (error) {
     console.error('Erreur lors de la génération du programme sportif IA:', error);
@@ -29,7 +29,8 @@ export const generateAISportProgram = async (userProfile) => {
  */
 export const getCurrentSportProgram = async (userId) => {
   try {
-    const response = await api.get(`sport-programs/current?userId=${userId}`);
+    // Mise à jour du chemin pour correspondre à l'API actuelle
+    const response = await apiClient.get(`sport-programs/user/${userId}`);
     return response;
   } catch (error) {
     // Si le code est 404, on retourne null plutôt que de lancer une erreur
@@ -38,6 +39,22 @@ export const getCurrentSportProgram = async (userId) => {
       return null;
     }
     console.error('Erreur lors de la récupération du programme sportif:', error);
+    throw error;
+  }
+};
+
+/**
+ * Récupère un programme sportif spécifique par son ID
+ * @param {string} programId - ID du programme sportif à récupérer
+ * @returns {Promise<object>} Le programme sportif
+ */
+export const fetchSportProgram = async (programId) => {
+  try {
+    // Mise à jour du chemin pour correspondre à l'API actuelle
+    const response = await apiClient.get(`sport-programs/${programId}`);
+    return response;
+  } catch (error) {
+    console.error('[Récupération du programme sportif] Erreur:', error);
     throw error;
   }
 };

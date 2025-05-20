@@ -22,10 +22,22 @@ export default function HomeScreen() {
     }
   }, []);
 
+  const fetchProgram = () => {
+    // Code pour récupérer le programme sportif
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
       <ScrollView contentContainerStyle={styles.scrollView}>
+        {error && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{error}</Text>
+            <TouchableOpacity style={styles.retryButton} onPress={() => fetchProgram()}>
+              <Text style={styles.retryButtonText}>Réessayer</Text>
+            </TouchableOpacity>
+          </View>
+        )}
         <View style={styles.header}>
           <Text style={styles.title}>Bienvenue {user?.displayName}</Text>
           <Text style={styles.subtitle}>Tableau de bord</Text>

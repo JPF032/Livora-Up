@@ -1,10 +1,15 @@
 import { Tabs } from 'expo-router';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import VoiceCommandButton from '../../src/components/VoiceCommandButton';
+
+// Importation temporairement commentée pour corriger l'erreur
+// La fonctionnalité de thème sera intégrée ultérieurement
+// import { ThemeProvider } from '../../src/theme/ThemeProvider';
 
 export default function TabsLayout() {
   return (
+    // ThemeProvider temporairement retiré pour corriger l'erreur
     <View style={styles.container}>
       <Tabs
         screenOptions={{
@@ -42,6 +47,33 @@ export default function TabsLayout() {
           title: 'Nutrition',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="restaurant" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="food-analysis"
+        options={{
+          title: 'Analyse',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="camera" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="theme-customizer"
+        options={{
+          title: 'Thème',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="color-lens" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="theme-demo"
+        options={{
+          title: 'Démo',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="style" size={size} color={color} />
           ),
         }}
       />

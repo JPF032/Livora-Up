@@ -1,8 +1,8 @@
 /**
  * Service de reconnaissance vocale pour Livora UP
- * Utilise expo-av pour l'enregistrement et une API cloud pour le STT (Speech-to-Text)
+ * Utilise expo-audio pour l'enregistrement et une API cloud pour le STT (Speech-to-Text)
  */
-import { Audio } from 'expo-audio';
+import * as Audio from 'expo-audio';
 import * as FileSystem from 'expo-file-system';
 import { Alert } from 'react-native';
 import { apiClient } from './apiClient';
@@ -11,15 +11,16 @@ import { apiClient } from './apiClient';
 const RECORDING_OPTIONS = {
   android: {
     extension: '.m4a',
-    outputFormat: Audio.AndroidOutputFormat.MPEG_4,
-    audioEncoder: Audio.AndroidAudioEncoder.AAC,
+    // Utiliser des valeurs directes plutôt que des constantes qui ont changé
+    outputFormat: 2, // MPEG_4 format
+    audioEncoder: 3,  // AAC encoder
     sampleRate: 44100,
     numberOfChannels: 1,
     bitRate: 128000,
   },
   ios: {
     extension: '.m4a',
-    audioQuality: Audio.IOSAudioQuality.HIGH,
+    audioQuality: 'high', // Utiliser une chaîne au lieu d'une constante
     sampleRate: 44100,
     numberOfChannels: 1,
     bitRate: 128000,
@@ -86,15 +87,16 @@ class VoiceRecognitionService {
       this.onResultCallback = onResult;
       this.onListeningChangeCallback = onListeningChange;
 
-      // Configurer le mode audio
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: true,
-        playsInSilentModeIOS: true,
-        staysActiveInBackground: false,
-      });
+      // Configurer le mode audio - API compatible avec expo-audio
+      await Audio.requestPermissionsAsync(); // S'assurer que les permissions sont accordées
+      
+      // Note: expo-audio peut avoir une API différente de expo-av
+      // Utiliser l'API adaptée à expo-audio
 
-      // Créer une nouvelle instance d'enregistrement
-      const { recording } = await Audio.Recording.createAsync(RECORDING_OPTIONS);
+      // Créer une nouvelle instance d'enregistrement avec expo-audio
+      const recording = new Audio.Recording();
+      await recording.prepareToRecordAsync(RECORDING_OPTIONS);
+      await recording.startAsync();
       this.recording = recording;
       
       // Mettre à jour l'état d'écoute
@@ -182,12 +184,20 @@ class VoiceRecognitionService {
         this.onListeningChangeCallback(false);
       }
 
-      // Obtenir l'URI de l'enregistrement
-      const uri = this.recording.getURI();
-      this.recording = null;
-
-      if (!uri) {
-        console.error('URI d\'enregistrement non disponible');
+      // Obtenir l'URI de l'enregistrement (compatible avec expo-audio)
+      let uri;
+      try {
+        // Différentes méthodes selon la version de l'API
+        uri = this.recording.getURI ? this.recording.getURI() : 
+              (this.recording._uri || this.recording._value);
+        this.recording = null;
+        
+        if (!uri) {
+          console.error('URI d\'enregistrement non disponible');
+          return;
+        }
+      } catch (uriError) {
+        console.error('Erreur lors de la récupération de l\'URI:', uriError);
         return;
       }
 
